@@ -23,17 +23,20 @@ This repository governs **taxonomy membership only**. It does not govern editori
 A candidate qualifies as a Hidden Cost Model only if **all four** of the following hold:
 
 1. **Architecturally created.** The cost is produced by an architectural decision or structural pattern — not by an operational mistake, a vendor error, or a one-time event.
-2. **Invisible at decision time.** The cost is not visible through normal procurement, budgeting, operational, or governance review processes at the time the decision creating it is made.
+2. **Invisible at decision time — model-absent, not merely unmonitored.** The cost is not represented in the procurement, budgeting, operational, or governance review *models* used to evaluate the decision that creates it. This is a stronger claim than "nobody happened to look": a cost that existing instrumentation could in principle surface with a better dashboard is a visibility gap, not a Hidden Cost Model. A cost whose driving mechanism has no representation in any review model at all — because that model was built around a different assumption entirely — is the target of this taxonomy. Test: could a more thorough version of the *existing* review process have caught this, or does catching it require a different review model altogether? If the former, it fails this criterion.
 3. **Consequence precedes recognition.** The organization experiences the consequence before it recognizes the dependency that produced it.
 4. **Generalizable.** The mechanism generalizes across technologies and vendors — it is not specific to one implementation.
 
 All four must hold. A candidate that fails any one of them is not a Hidden Cost Model, regardless of how architecturally interesting or costly it is.
 
+**Guardrail:** Criterion 2's model-absence framing explains the *mechanism* of invisibility — it does not redefine the taxonomy. Cost remains load-bearing in Criterion 1. A mechanism that is invisible to every existing decision model but has no cost dimension at all does not qualify; decision-model blindness is the reason a genuine Hidden Cost Model stays hidden, not an alternate criterion that can substitute for cost.
+
 ![Hidden Cost Model Qualification Test — four sequential gates showing a passing mechanism versus a false positive stopped at gate two](https://www.rack2cloud.com/wp-content/uploads/2026/08/hidden-cost-model-qualification-test.jpg)
+
 
 ### Common False Positives
 
-A taxonomy without a documented miss case expands until it swallows everything. These are candidates that look like a fit and aren't:
+A taxonomy without a documented miss case expands until it swallows everything. These are candidates that look like a fit and aren't. The BMC firmware RCE signal below is the taxonomy's current documented miss case — no additional negative example is required to consider the qualification test calibrated, though a Criterion-2-specific miss (architecturally created, generalizable, consequence-precedes-recognition, but still visible to existing models) would be useful future calibration if one surfaces.
 
 | Candidate | Why It Fails |
 |---|---|
@@ -59,9 +62,12 @@ Mechanisms with an existing entry in `r2c-frameworks.json`.
 | #81 Latency Debt | — | Accumulated performance/cost penalty when placement decisions defer latency until it must be bought back through architecture change |
 | #82 False Completion | — | Operation reports success by system metrics while the underlying objective was not met |
 | #115 Control Plane Capture | — | Authority concentration cost invisible in normal reviews until alternatives become impractical |
+| #132 Coordination Density | — | Orchestration/governance overhead required to produce a unit of agentic execution, absent from Compute Density-oriented capacity and cost models by construction, not merely under-instrumented |
 | #154 Governance Legitimacy Boundary | Governance Theater | Governance structures exist, are documented, and are staffed, but cannot produce a revocation decision, an audit result, or a challenge to a specific delegation |
 
 Framework and failure state are recorded as separate fields deliberately — they are not interchangeable, and collapsing them into one label ("#154 Governance Theater") loses the distinction between the mechanism and its named failure signature.
+
+**Candidate provenance — #132 Coordination Density.** Initially held rather than admitted on first pass. Initial concern: could be interpreted as ordinary resource consumption (CPU cycles are expensive) rather than a hidden-cost mechanism, which would fail Criterion 2. Resolution: direct evidence review against the post's actual body text (`/cpu-coordination-density-agentic-ai/`) found that coordination-specific cost drivers — orchestration calls per task, memory/context arbitration latency, cross-agent lock contention, policy-evaluation cycles per request — are absent from the capacity and cost review *models* currently in use, not merely unmonitored inside models that could otherwise see them (per the sharpened Criterion 2 above). Confirmed via the post's own framing of the Xeon supply shortage as a pre-existing dependency exposed by an external event, not created by it — the same hidden-dependency-exists-before-trigger shape as #115 and Cloud Concentration Risk. Preserved here as precedent for reviewing future borderline candidates that read as resource consumption on a secondhand summary but may pass on direct-text review.
 
 ### Part II — Associated Models and Mechanisms
 
