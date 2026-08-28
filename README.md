@@ -12,9 +12,9 @@
 
 This repository is the canonical source of truth for what qualifies as a **Hidden Cost Model** on Rack2Cloud — a cross-pillar classification, not a pillar-owned one. It does not decide what gets published, when, or in what post. It decides one thing only: does a given mechanism belong in this taxonomy.
 
-Hidden Cost Models cut across AI Infrastructure, Cloud Strategy, Virtualization, Modern Infrastructure & IaC, and Data Protection. Some are Rack2Cloud framework registry entries (`r2c-frameworks.json`) that happen to describe a hidden-cost mechanism. Some are cost/exposure models that were never minted as frameworks at all, because they were built around a formula rather than a failure-state definition. Both belong here if they pass the qualification test below. Neither belongs here by default.
+Hidden Cost Models cut across AI Infrastructure, Cloud Strategy, Virtualization, Modern Infrastructure & IaC, and Data Protection. Some are Rack2Cloud framework registry entries that happen to describe a hidden-cost mechanism. Some are cost/exposure models that were never minted as frameworks at all, because they were built around a formula rather than a failure-state definition. Both belong here if they pass the qualification test below. Neither belongs here by default.
 
-This repository governs **taxonomy membership only**. It does not govern editorial routing — whether a given signal or post becomes part of a specific Hidden Cost Models article. That is a separate decision, governed by Rule 29 (Signal-Series Join Rule) in `skill-wp-standards.md`. See "Relationship to Editorial Routing" below.
+This repository governs **taxonomy membership only**. It does not govern editorial routing — whether a given signal or post becomes part of a specific Hidden Cost Models article. That is a separate, internally governed decision. See "Relationship to Editorial Routing" below.
 
 ---
 
@@ -43,7 +43,7 @@ A taxonomy without a documented miss case expands until it swallows everything. 
 | Capacity planning shortfall | Cost was visible beforehand — fails test 2 |
 | Known licensing increase | Cost was disclosed and measurable — fails test 2 |
 | Standard technical debt backlog | Recognized by existing review mechanisms — fails test 2 |
-| BMC firmware RCE signal (`sig_20260820_004`) | Real operational-risk cost, but not architecture-created — fails test 1. Also Rule 29's own reference miss case: looked cost/risk-adjacent on framing, proved a different (Operational Resilience) thesis on inspection |
+| BMC firmware RCE signal | Real operational-risk cost, but not architecture-created — fails test 1. Also a documented editorial-routing miss case: looked cost/risk-adjacent on framing, proved a different (Operational Resilience) thesis on inspection |
 
 ---
 
@@ -55,7 +55,7 @@ Organized by **registry residency**, not by asset type. Residency is a durable, 
 
 ### Part I — Framework Registry Members
 
-Mechanisms with an existing entry in `r2c-frameworks.json`.
+Mechanisms with an existing entry in Rack2Cloud's internal framework registry.
 
 | Framework | Failure State | Notes |
 |---|---|---|
@@ -76,20 +76,22 @@ Cost/exposure mechanisms with no framework registry entry.
 | Model | Status | Notes |
 |---|---|---|
 | Cloud Concentration Risk | Confirmed | `Business Impact × Duration × Dependency Concentration = Exposure` — no framework residency; belongs here by formula, not by registry number |
-| Access Authorization Gap | Pending Validation | Candidate only — qualification test not yet run against actual post content. Do not treat as a confirmed member until an evidence review (Candidate / Evidence Review / Pass-Fail / Reason) is completed and recorded here |
+| Access Authorization Gap | Confirmed | Self-attestation as a purpose-verification control produces an answer without independently establishing the fact it exists to verify — architecturally created by the self-attestation design choice, not an operational lapse; no framework residency |
+
+**Candidate provenance — Access Authorization Gap.** Full-body evidence review against `/access-authorization-gap/` confirmed all four criteria. Criterion 1: the gap is produced by the self-attestation control design itself — any system adopting self-attestation as its purpose-check inherits this gap by construction, not by accident. Criterion 2 (deterministic test applied): the standard entitlement/access review ("does this identity hold a grant that technically covers this resource") cannot surface a self-attestation gap no matter how thoroughly it is run, because it is structurally asking a different question than purpose-verification asks; catching it requires a different review model — a purpose-verification audit — not a more thorough version of the existing one. Model-absent, not merely unmonitored. Criterion 3: the self-attestation control fired and logged an answer that verified nothing; the consequence (unauthorized lookup of the Australian Prime Minister's personal banking records) surfaced only after the fact, not at decision time. Criterion 4: the post demonstrates recurrence across three independent layers within its own body — GhostApproval (AI coding-assistant approval, human-in-the-loop), the Entra ID exploitation status reversal (vendor-scale self-attestation with no independent customer-side check), and Session Control Gap (downstream sibling failure, same lifecycle) — same underlying shape: a control producing an answer without independently establishing the condition it claims to verify. Residency: Part II, no framework anchor exists — RM's explicit call at draft time, same precedent as Sandbox Escape / Verification Asymmetry / VMware Deferral (evaluative lens, not a reusable failure-state model). Preserved here as a second worked example of the Criterion 2 "model-absent" test, alongside #132 Coordination Density's provenance above, for future borderline-candidate reference.
 
 ---
 
 ## Relationship to Editorial Routing
 
-Classification under the Hidden Cost Models taxonomy does not imply eligibility for inclusion in a specific Hidden Cost Models article. Editorial routing remains governed by Rule 29 (Signal-Series Join Rule) in `skill-wp-standards.md`.
+Classification under the Hidden Cost Models taxonomy does not imply eligibility for inclusion in a specific Hidden Cost Models article. Editorial routing is governed separately, by Rack2Cloud's internal editorial process.
 
 Taxonomy membership is **necessary but not sufficient** for series-post inclusion:
 
-- A mechanism that fails the taxonomy test is never a Rule 29 candidate, regardless of narrative fit.
-- A mechanism that passes the taxonomy test does not automatically satisfy Rule 29's three-part series test (survives on its own merits / proves the specific installment's thesis / the post is measurably weaker without it).
+- A mechanism that fails the taxonomy test is never an editorial-routing candidate, regardless of narrative fit.
+- A mechanism that passes the taxonomy test does not automatically satisfy the editorial process's own series test (survives on its own merits / proves the specific installment's thesis / the post is measurably weaker without it).
 
-This repository answers "does this mechanism belong in the taxonomy." Rule 29 answers "does this signal belong in this specific post." They are different questions at different altitudes, evaluated separately, by design.
+This repository answers "does this mechanism belong in the taxonomy." The editorial process answers "does this signal belong in this specific post." They are different questions at different altitudes, evaluated separately, by design.
 
 ---
 
@@ -104,7 +106,7 @@ This repository answers "does this mechanism belong in the taxonomy." Rule 29 an
 
 ## Maintenance Notes
 
-This repository is the authoritative source for Hidden Cost Models taxonomy membership. It is maintained against `r2c-frameworks.json` (framework residency truth) and `skill-wp-standards.md` Rule 29 (editorial routing). Framework entries in Part I are pulled from registry truth, not restated independently — if the registry updates a framework's name, failure state, or status, this file's Part I table should be checked for drift at that time.
+This repository is the authoritative source for Hidden Cost Models taxonomy membership. It is maintained against the Rack2Cloud [Canonical Architecture Specifications](https://www.rack2cloud.com/canonical-architecture-specifications/) governance system, including the internal framework registry (residency truth) and the internal editorial-routing process. Framework entries in Part I are pulled from registry truth, not restated independently — if the registry updates a framework's name, failure state, or status, this file's Part I table should be checked for drift at that time.
 
 New candidates (framework or non-framework) are added only after an explicit qualification-test pass, recorded in the relevant Part I/Part II table with status. Pending candidates stay marked Pending Validation until an evidence review is completed and documented — never promoted on title or thesis-summary recognition alone.
 
