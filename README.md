@@ -73,16 +73,43 @@ Framework and failure state are recorded as separate fields deliberately — the
 
 Cost/exposure mechanisms with no framework registry entry.
 
-Unlike Part I, residency in Part II is determined entirely by qualification-test outcome rather than framework status. These mechanisms satisfy the Hidden Cost Model test but are expressed as evaluative models, formulas, or architectural lenses rather than reusable framework-registry failure-state definitions.
+Unlike Part I, Part II captures mechanisms that satisfy the Hidden Cost Model qualification test but do not resolve into reusable framework-registry failure-state definitions. These residents are expressed as formulas, evaluative models, architectural lenses, or decision-analysis mechanisms whose value lies in exposing hidden exposure rather than defining a reusable architectural failure state.
 
-| Model | Status | Notes |
-|---|---|---|
-| Cloud Concentration Risk | Confirmed | `Business Impact × Duration × Dependency Concentration = Exposure` — no framework residency; belongs here by formula, not by registry number |
-| Access Authorization Gap | Confirmed | Self-attestation as a purpose-verification control produces an answer without independently establishing the fact it exists to verify — architecturally created by the self-attestation design choice, not an operational lapse; no framework residency |
+#### Cloud Concentration Risk
 
-**Candidate provenance — Cloud Concentration Risk.** Confirmed after review against all four qualification criteria. Criterion 1: exposure is created by architectural concentration decisions, not by the triggering event that later reveals it. Criterion 2: dependency concentration is typically absent from procurement, cost, and resilience review models as an explicit decision variable; reviews evaluate the component being adopted, not the aggregate concentration being accumulated. Criterion 3: organizations experience the consequence only when an outage, commercial dispute, regulatory action, or platform dependency event reveals the concentration that already existed. Criterion 4: the mechanism generalizes across cloud providers, SaaS platforms, infrastructure vendors, and internal platform dependencies. Residency: Part II because the model is expressed as a formula rather than a framework-registry failure-state definition.
+**Status:** Confirmed
 
-**Candidate provenance — Access Authorization Gap.** Full-body evidence review against [`/access-authorization-gap/`](https://www.rack2cloud.com/access-authorization-gap/) confirmed all four criteria. Criterion 1: the gap is produced by the self-attestation control design itself — any system adopting self-attestation as its purpose-check inherits this gap by construction, not by accident. Criterion 2 (deterministic test applied): the standard entitlement/access review ("does this identity hold a grant that technically covers this resource") cannot surface a self-attestation gap no matter how thoroughly it is run, because it is structurally asking a different question than purpose-verification asks; catching it requires a different review model — a purpose-verification audit — not a more thorough version of the existing one. Model-absent, not merely unmonitored. Criterion 3: the self-attestation control fired and logged an answer that verified nothing; the consequence (unauthorized lookup of the Australian Prime Minister's personal banking records) surfaced only after the fact, not at decision time. Criterion 4: the post demonstrates recurrence across three independent layers within its own body — GhostApproval (AI coding-assistant approval, human-in-the-loop), the Entra ID exploitation status reversal (vendor-scale self-attestation with no independent customer-side check), and Session Control Gap (downstream sibling failure, same lifecycle) — same underlying shape: a control producing an answer without independently establishing the condition it claims to verify. Residency: Part II, no framework anchor exists. Preserved here as a second worked example of the Criterion 2 "model-absent" test, alongside #132 Coordination Density's provenance above, for future borderline-candidate reference.
+`Business Impact × Duration × Dependency Concentration = Exposure` — no framework residency; belongs here by formula, not by registry number.
+
+Confirmed after review against all four qualification criteria.
+
+Criterion 1: exposure is created by architectural concentration decisions, not by the triggering event that later reveals it.
+
+Criterion 2: dependency concentration is typically absent from procurement, cost, and resilience review models as an explicit decision variable; reviews evaluate the component being adopted, not the aggregate concentration being accumulated.
+
+Criterion 3: organizations experience the consequence only when an outage, commercial dispute, regulatory action, or platform dependency event reveals the concentration that already existed.
+
+Criterion 4: the mechanism generalizes across cloud providers, SaaS platforms, infrastructure vendors, and internal platform dependencies.
+
+Residency: Part II because the model is expressed as a formula rather than a framework-registry failure-state definition.
+
+#### Access Authorization Gap
+
+**Status:** Confirmed
+
+Self-attestation as a purpose-verification control produces an answer without independently establishing the fact it exists to verify — architecturally created by the self-attestation design choice, not an operational lapse.
+
+Full-body evidence review against [Access Authorization Gap](https://www.rack2cloud.com/access-authorization-gap/) confirmed all four criteria. 
+
+Criterion 1: the gap is produced by the self-attestation control design itself — any system adopting self-attestation as its purpose-check inherits this gap by construction, not by accident. 
+
+Criterion 2 (deterministic test applied): the standard entitlement/access review ("does this identity hold a grant that technically covers this resource") cannot surface a self-attestation gap no matter how thoroughly it is run, because it is structurally asking a different question than purpose-verification asks; catching it requires a different review model, not a more thorough version of the existing one. Model-absent, not merely unmonitored. 
+
+Criterion 3: the control fired and logged an answer that verified nothing; the consequence surfaced only after the architectural decision was already operating, not at decision time. 
+
+Criterion 4: the post demonstrates recurrence across three independent layers within its own body — GhostApproval (AI coding-assistant approval, human-in-the-loop), the Entra ID exploitation status reversal (vendor-scale self-attestation with no independent customer-side check), and Session Control Gap (downstream sibling failure, same lifecycle) — same underlying shape: a control producing an answer without independently establishing the condition it claims to verify. 
+
+Residency: Part II because the mechanism functions as an evaluative lens for identifying purpose-verification failures rather than a reusable framework-registry failure-state definition. Preserved here as a second worked example of the Criterion 2 "model-absent" test, alongside #132 Coordination Density's provenance above, for future borderline-candidate reference.
 
 ---
 
@@ -112,7 +139,7 @@ This repository answers "does this mechanism belong in the taxonomy." The editor
 
 This repository is the authoritative source for Hidden Cost Models taxonomy membership. It is maintained against the Rack2Cloud [Canonical Architecture Specifications](https://www.rack2cloud.com/canonical-architecture-specifications/) governance system, including the internal framework registry (residency truth) and the internal editorial-routing process. Framework entries in Part I are pulled from registry truth, not restated independently — if the registry updates a framework's name, failure state, or status, this file's Part I table should be checked for drift at that time.
 
-New candidates (framework or non-framework) are added only after an explicit qualification-test pass, recorded in the relevant Part I/Part II table with status. Pending candidates stay marked Pending Validation until an evidence review is completed and documented — never promoted on title or thesis-summary recognition alone.
+New candidates (framework or non-framework) are added only after an explicit qualification-test pass — recorded in the Part I table with status, or as a new Part II registry entry with status. Pending candidates stay marked Pending Validation until an evidence review is completed and documented — never promoted on title or thesis-summary recognition alone.
 
 ---
 
